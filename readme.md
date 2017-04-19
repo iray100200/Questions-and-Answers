@@ -9,10 +9,10 @@
       console.log(this.name);
   }
   function Person(name) {
-      Name.apply(this, arguments); // super constructor..
+      Name.apply(this, arguments); // super constructor.. in the second way, should remove current line
   }
   
-  Person.prototype = Name.prototype;
+  Person.prototype = Name.prototype; // Person.prototype = new Name("Raymond");
   var name = new Name("Raymond")
   var person = new Person("Raymond");
   person.getName();
