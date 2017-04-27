@@ -22,3 +22,13 @@
   name instanceof Person //false
 ```
 - 3 CSS 块级元素 margin引发的问题，可以设置块级为行内元素可消除margin-top，margin-bottom共同存在时引发的问题
+- 4 利用Array.prototype.reduceRight去重复数据
+```javascript
+  var array = [0, 1, 4, 6, 3, 0, 6];
+  function unique(obj) {
+      obj.reduceRight(function(a, c, index) {
+          if(a.indexOf(c) !== index) a.splice(index, 1);
+          return a;
+      }, obj);
+  }
+```
