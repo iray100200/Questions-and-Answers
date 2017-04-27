@@ -31,4 +31,5 @@
           return a;
       }, obj);
   }
+  unique(array); // outputs: [0, 1, 4, 6, 3]
 ```
