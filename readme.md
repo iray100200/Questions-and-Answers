@@ -26,10 +26,10 @@
 ```javascript
   var array = [0, 1, 4, 6, 3, 0, 6];
   function unique(obj) {
-      obj.reduceRight(function(a, c, index) {
-          if(a.indexOf(c) !== index) a.splice(index, 1);
-          return a;
-      }, obj);
+      obj.reduce(function(a, c, index, d) {
+          if(d.indexOf(c) !== index) d.splice(index, 1);
+          return d;
+      });
   }
   unique(array); // outputs: [0, 1, 4, 6, 3]
 ```
