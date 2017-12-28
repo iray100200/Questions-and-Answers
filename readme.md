@@ -33,3 +33,7 @@
   }
   unique(array); // outputs: [0, 1, 4, 6, 3]
 ```
+- 5 利用Array创建特定长度数组
+```javascript
+  Array.apply(this, { length: 100 }).map(Function.call, fn) // fn .. Number .. function(i) { return i; }
+```
