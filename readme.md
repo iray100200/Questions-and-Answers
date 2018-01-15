@@ -41,3 +41,7 @@
 ```javascript
   Array.apply(this, { length: 100 }).map(Function.call, fn) // fn .. Number .. function(i) { return i; }
 ```
+- 6 正则表达式
+-- /i (忽略大小写)
+-- /g (全文查找出现的所有匹配字符)
+-- /m (多行查找)
