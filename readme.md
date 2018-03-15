@@ -58,3 +58,27 @@
 3. 将 DOM 与 CSSOM 合并成一个渲染树。
 4. 根据渲染树来布局，以计算每个节点的几何信息。
 5. 将各个节点绘制到屏幕上。
+- 9 使用requestAnimationFrame
+```javascript
+var taskList = breakBigTaskIntoMicroTasks(monsterTaskList);
+requestAnimationFrame(processTaskList);
+
+function processTaskList(taskStartTime) {
+  var taskFinishTime;
+
+  do {
+    // Assume the next task is pushed onto a stack.
+    var nextTask = taskList.pop();
+
+    // Process nextTask.
+    processTask(nextTask);
+
+    // Go again if there’s enough time to do the next task.
+    taskFinishTime = window.performance.now();
+  } while (taskFinishTime - taskStartTime < 3);
+
+  if (taskList.length > 0)
+    requestAnimationFrame(processTaskList);
+
+}
+```
