@@ -52,3 +52,9 @@
 <link href="print.css" rel="stylesheet" media="print"> <!--打印内容时适用,或想重新安排布局、更改字体适用-->
 <link href="other.css" rel="stylesheet" media="(min-width: 40em)"> <!--媒体查询符合条件时阻塞渲染-->
 ```
+- 8 浏览器渲染逻辑
+1 处理 HTML 标记并构建 DOM 树。
+2 处理 CSS 标记并构建 CSSOM 树。
+3 将 DOM 与 CSSOM 合并成一个渲染树。
+4 根据渲染树来布局，以计算每个节点的几何信息。
+5 将各个节点绘制到屏幕上。
