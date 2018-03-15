@@ -45,3 +45,10 @@
 -- /i (忽略大小写)
 -- /g (全文查找出现的所有匹配字符)
 -- /m (多行查找)
+
+- 7 CSS 是阻塞渲染的资源。需要将它尽早、尽快地下载到客户端，以便缩短首次渲染的时间。
+```css
+<link href="style.css" rel="stylesheet"> 始终阻塞渲染
+<link href="print.css" rel="stylesheet" media="print"> 打印内容时适用---或许您想重新安排布局、更改字体适用
+<link href="other.css" rel="stylesheet" media="(min-width: 40em)"> 媒体查询符合条件时阻塞渲染
+```
