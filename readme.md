@@ -82,3 +82,29 @@ function processTaskList(taskStartTime) {
 
 }
 ```
+- 10  柯里化
+```javascript
+function currying(fn) {
+  var args = [];
+  return function() {
+    if (arguments.length === 0) {
+      return fn.apply(this, args);
+    }
+    console.log(1, arguments)
+    Array.prototype.push.apply(args, arguments)
+    return arguments.callee;
+  }
+}
+
+var pure = function() {
+  console.log(2, arguments);
+  if (arguments.length === 1) return arguments[0]
+  return Array.from(arguments).reduce((a, b) => a + b)
+}
+
+let a = currying(pure)
+
+a(1)
+a(2)()
+
+```
