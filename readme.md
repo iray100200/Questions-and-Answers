@@ -108,3 +108,17 @@ a(1)
 a(2)()
 
 ```
+- 11 快速排序算法
+```javascript
+function sort(array) {
+    if (array.length <= 1) { return array; }
+    var v = array.splice(0, 1)[0]
+    var left = [], right = [];
+    for ( var i = 0; i < array.length; i++) {
+        if (array[i] < v) left.push(array[i])
+        else right.push(array[i])
+    }
+    console.log(left, right, array, v)
+    return sort(left).concat([v], sort(right))
+}
+```
