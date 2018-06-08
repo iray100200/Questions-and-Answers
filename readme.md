@@ -30,10 +30,11 @@
 ```javascript
   var array = [0, 1, 4, 6, 3, 0, 6];
   function unique(obj) {
-      obj.reduce(function(a, c, index, d) {
-          if(d.indexOf(c) !== index) d.splice(index, 1);
-          return d;
-      });
+    return obj.reduceRight(function(a, c, index, d) {
+        if (a == c || (f = d.lastIndexOf(c)) !== index)
+        d.splice(index || f, 1);
+        if (!index) return d
+    });
   }
   unique(array); // outputs: [0, 1, 4, 6, 3]
 ```
