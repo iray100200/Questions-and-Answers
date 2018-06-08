@@ -37,6 +37,34 @@
     });
   }
   unique(array); // outputs: [0, 1, 4, 6, 3]
+  
+  //others
+  
+  function uniq(array) {
+    var n = 0;
+    var p = 0;
+    for (var i = 1; i < array.length;) {
+        if (array[i] === array[n]) {
+            array.splice(i, 1);
+        } else {
+            n++;
+            i++;
+        }
+    }
+    return array;
+}
+
+function uniq(array) {
+    for (var i = 0; i < array.length;) {
+        if ((c = array.lastIndexOf(array[i])) !== i) {
+            array.splice(c, 1)
+        } else {
+            i++
+        }
+    }
+    return array
+}
+
 ```
 - 5 利用Array创建特定长度数组
 ```javascript
