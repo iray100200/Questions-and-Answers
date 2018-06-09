@@ -151,3 +151,21 @@ function sort(array) {
     return sort(left).concat([v], sort(right))
 }
 ```
+- 12 深度优先遍历算法实现
+```javascript
+function traverse(obj, callback) {
+    var p = [];
+    function _traverse(_obj) {
+        if (typeof _obj && _obj.length) {
+            for (var j = 0; j < _obj.length; j++) {
+                _traverse(_obj[j])
+            }
+        } else {
+            p.push(_obj)
+            if (callback) callback(_obj)
+        }
+    }
+    _traverse(obj);
+    return p;
+}
+```
