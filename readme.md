@@ -169,3 +169,26 @@ function traverse(obj, callback) {
     return p;
 }
 ```
+
+- 12 广度优先遍历
+
+```javascript
+function bfs(array) {
+  var result = [];
+  (function traverse(a) {
+    let t = []
+    for (var i = 0; i < a.length; i++) {
+      if (typeof a[i] === 'object') {
+        t = t.concat(a[i])
+      } else {
+        result.push(a[i])
+      }
+    }
+    if (t.length > 0) {
+      traverse(t)
+    }
+    return result
+  })(array)
+  return result
+}
+```
