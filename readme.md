@@ -16,7 +16,7 @@
       Name.apply(this, arguments); // super constructor.. in the second way, should remove current line
   }
   
-  Person.prototype = Name.prototype; // Person.prototype = new Name("Raymond");
+  Person.prototype = Object.create(Name.prototype); // Person.prototype = new Name("Raymond");
   var name = new Name("Raymond")
   var person = new Person("Raymond");
   person.getName();
@@ -191,4 +191,11 @@ function bfs(array) {
   })(array)
   return result
 }
+```
+
+- 13 Promise.resolve(thennable)
+
+```javascript
+const promise1 = Promise.resolve('test')
+Promise.resolve(promise1).then(console.log) // output: test, not a promise object
 ```
