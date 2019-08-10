@@ -199,3 +199,7 @@ function bfs(array) {
 const promise1 = Promise.resolve('test')
 Promise.resolve(promise1).then(console.log) // output: test, not a promise object
 ```
+
+- 14 跨域附加
+1. websocket
+2. iframe http get
