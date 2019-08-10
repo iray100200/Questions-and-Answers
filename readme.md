@@ -201,5 +201,5 @@ Promise.resolve(promise1).then(console.log) // output: test, not a promise objec
 ```
 
 - 14 跨域附加
-1. websocket
+1. WebSocket
 2. iframe http get
