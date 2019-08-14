@@ -12,18 +12,11 @@
   Name.prototype.getName = function() {
       console.log(this.name);
   }
-  function Person(name) {
-      Name.apply(this, arguments); // super constructor.. in the second way, should remove current line
+  function Person() {
+     Person.prototype = Object.create(Name.prototype)
+     Person.__proto__ = Name
+     Person.__proto__.apply(this, arguments)
   }
-  
-  Person.prototype = Object.create(Name.prototype); // Person.prototype = new Name("Raymond");
-  var name = new Name("Raymond")
-  var person = new Person("Raymond");
-  person.getName();
-  // output: Raymond
-  person instanceof Person //true
-  person instanceof Name //true
-  name instanceof Person //false
 ```
 - 3 CSS 块级元素 margin引发的问题，可以设置块级为行内元素可消除margin-top，margin-bottom共同存在时引发的问题
 - 4 利用Array.prototype.reduceRight去重复数据
