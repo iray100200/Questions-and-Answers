@@ -210,6 +210,7 @@ function _asyncToGenerator(fn) {
        resolve(val.value)
      } catch (e) {
        reject(e)
+       return
      }
      if (val.done) {
        resolve(val.value)
