@@ -198,3 +198,29 @@ Promise.resolve(promise1).then(console.log) // output: test, not a promise objec
 1. WebSocket
 2. iframe http get
 ```
+
+- 15 asyncToGenerator
+```javascript
+function _asyncToGenerator(fn) {
+ return new Promise((resolve, reject) => {
+   let gen = fn.apply(this, arguments)
+   function step(key, args) {
+     try {
+       var val = gen[key](args)
+       resolve(val.value)
+     } catch (e) {
+       reject(e)
+     }
+     if (val.done) {
+       resolve(val.value)
+     } else {
+       return Promise.resolve(val.value).then(function (value) {
+         step('next', value)
+       }, function (err) {
+         step('throw', err)
+       })
+     }
+   }
+ })
+}
+```
