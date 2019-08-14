@@ -13,9 +13,9 @@
       console.log(this.name);
   }
   function Person() {
-     Person.prototype = Object.create(Name.prototype)
-     Person.__proto__ = Name
-     Person.__proto__.apply(this, arguments)
+     Person.prototype = Object.create(Name.prototype) // 继承方法
+     Person.__proto__ = Name // 继承属性
+     Person.__proto__.apply(this, arguments) //super
   }
 ```
 - 3 CSS 块级元素 margin引发的问题，可以设置块级为行内元素可消除margin-top，margin-bottom共同存在时引发的问题
