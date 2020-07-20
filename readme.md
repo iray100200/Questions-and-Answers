@@ -1,5 +1,5 @@
-# - 1 <!doctype html>是为了防止浏览器兼容性问题所规定的，不加doctype可能会引发未知的兼容性问题;
-# - 2 <meta http-equiv="Content-Security-Policy" content="script-src 'self'>
+## 1 ```<!doctype html>```是为了防止浏览器兼容性问题所规定的，不加doctype可能会引发未知的兼容性问题;
+## 2 <meta http-equiv="Content-Security-Policy" content="script-src 'self'>
     SRI Subresource Integrity 
 ```xml
     <script crossorigin="anonymous" integrity="sha256-xxxx" src="http://cdn.example.com/js/jquery.js"></script>
