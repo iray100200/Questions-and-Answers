@@ -228,25 +228,25 @@ function _asyncToGenerator(fn) {
 ```
 
 - 16 Array.apply(this, { length: 100 }).map(Function.call, Number) 发生了什么
-其中Function.call 可以等价于
+##### 其中Function.call 可以等价于
 ```
 // (a, b, c为arguments)
 var _call = function (_thisobj, a, b, c) { 
   return Function(a, b, c)
 }
 ```
-然而，由于map的第二个参数Number存在，上述语句可以等价为
+##### 然而，由于map的第二个参数Number存在，上述语句可以等价为
 ```
 (Function.call).call(Number, a, b, c) // (a, b, c为arguments)
 ```
-再经过转换，可以等价为
+##### 再经过转换，可以等价为
 ```
 // 通过第二个call，_thisobj = Number
 var _call = function (_thisobj, a, b, c) { 
   return Number(a, b, c)
 }
 ```
-所以会有
+##### 所以会有
 ```
 Array.apply(this, { length: 100 }).map(function (_thisobj, a, b, c) { 
   return Number(a, b, c)
