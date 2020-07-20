@@ -1,10 +1,10 @@
-## 1 ```<!doctype html>```是为了防止浏览器兼容性问题所规定的，不加doctype可能会引发未知的兼容性问题;
-## 2 ```<meta http-equiv="Content-Security-Policy" content="script-src 'self'>```
+### 1 ```<!doctype html>```是为了防止浏览器兼容性问题所规定的，不加doctype可能会引发未知的兼容性问题;
+```<meta http-equiv="Content-Security-Policy" content="script-src 'self'>```
     SRI Subresource Integrity 
 ```xml
     <script crossorigin="anonymous" integrity="sha256-xxxx" src="http://cdn.example.com/js/jquery.js"></script>
 ```
-## 3 ```Object.create()``` 实现继承，还需要执行被继承者的```constructor```，以防止取不到被继承者的属性
+### 2 ```Object.create()``` 实现继承，还需要执行被继承者的```constructor```，以防止取不到被继承者的属性
 ```javascript
   function Name(name) {
       this.name = name;
@@ -18,8 +18,8 @@
      Person.__proto__.apply(this, arguments) //super
   }
 ```
-## 3 ```CSS``` 块级元素 ```margin```引发的问题，可以设置块级为行内元素可消除```margin-top```，```margin-bottom```共同存在时引发的问题
-## 4 利用```Array.prototype.reduceRight```去重复数据
+### 3 ```CSS``` 块级元素 ```margin```引发的问题，可以设置块级为行内元素可消除```margin-top```，```margin-bottom```共同存在时引发的问题
+### 4 利用```Array.prototype.reduceRight```去重复数据
 ```javascript
   var array = [0, 1, 4, 6, 3, 0, 6];
   function unique(obj) {
@@ -59,28 +59,28 @@ function uniq(array) {
 }
 
 ```
-## 5 利用``Array``创建特定长度数组
+### 5 利用``Array``创建特定长度数组
 ```javascript
   Array.apply(this, { length: 100 }).map(Function.call, fn) // fn .. Number .. function(i) { return i; }
 ```
-# 6 正则表达式
+### 6 正则表达式
 -- ```/i``` (忽略大小写)
 -- ```/g``` (全文查找出现的所有匹配字符)
 -- ```/m``` (多行查找)
 
-## 7 ```CSS``` 是阻塞渲染的资源。需要将它尽早、尽快地下载到客户端，以便缩短首次渲染的时间。
+### 7 ```CSS``` 是阻塞渲染的资源。需要将它尽早、尽快地下载到客户端，以便缩短首次渲染的时间。
 ```HTML
 <link href="style.css" rel="stylesheet"> <!--始终阻塞渲染-->
 <link href="print.css" rel="stylesheet" media="print"> <!--打印内容时适用,或想重新安排布局、更改字体适用-->
 <link href="other.css" rel="stylesheet" media="(min-width: 40em)"> <!--媒体查询符合条件时阻塞渲染-->
 ```
-## 8 浏览器渲染逻辑
+### 8 浏览器渲染逻辑
 1. 处理 HTML 标记并构建 DOM 树。
 2. 处理 CSS 标记并构建 CSSOM 树。
 3. 将 DOM 与 CSSOM 合并成一个渲染树。
 4. 根据渲染树来布局，以计算每个节点的几何信息。
 5. 将各个节点绘制到屏幕上。
-## 9 使用```requestAnimationFrame```
+### 9 使用```requestAnimationFrame```
 ```javascript
 var taskList = breakBigTaskIntoMicroTasks(monsterTaskList);
 requestAnimationFrame(processTaskList);
@@ -104,7 +104,7 @@ function processTaskList(taskStartTime) {
 
 }
 ```
-## 10  柯里化
+### 10  柯里化
 ```javascript
 function currying(fn) {
   var args = [];
@@ -130,7 +130,7 @@ a(1)
 a(2)()
 
 ```
-## 11 快速排序算法
+### 11 快速排序算法
 ```javascript
 function sort(array) {
     if (array.length <= 1) { return array; }
@@ -144,7 +144,7 @@ function sort(array) {
     return sort(left).concat([v], sort(right))
 }
 ```
-## 12 深度优先遍历算法实现
+### 12 深度优先遍历算法实现
 ```javascript
 function traverse(obj, callback) {
     var p = [];
@@ -163,7 +163,7 @@ function traverse(obj, callback) {
 }
 ```
 
-## 12 广度优先遍历
+### 12 广度优先遍历
 
 ```javascript
 function bfs(array) {
@@ -186,20 +186,20 @@ function bfs(array) {
 }
 ```
 
-## 13 Promise.resolve(thennable)
+### 13 ```Promise.resolve(thennable)```
 
 ```javascript
 const promise1 = Promise.resolve('test')
 Promise.resolve(promise1).then(console.log) // output: test, not a promise object
 ```
 
-## 14 跨域附加
+### 14 跨域附加
 ```
 1. WebSocket
 2. iframe http get
 ```
 
-## 15 ```asyncToGenerator```
+### 15 ```asyncToGenerator```
 ```javascript
 function _asyncToGenerator(fn) {
  return new Promise((resolve, reject) => {
@@ -227,7 +227,7 @@ function _asyncToGenerator(fn) {
 }
 ```
 
-## 16 ```Array.apply(this, { length: 100 }).map(Function.call, Number)``` 发生了什么
+### 16 ```Array.apply(this, { length: 100 }).map(Function.call, Number)``` 发生了什么
 ##### 其中```Function.call``` 可以等价于
 ```
 // (a, b, c为arguments)
