@@ -324,11 +324,11 @@ class LinkedList {
         let previousNode = this.head
         let currentNode = this.head
         while (currentNode.next && n++ < index) {
-            previous = currentNode
+            previousNode = currentNode
             currentNode = currentNode.next
         }
         node.next = currentNode
-        previous.next = node
+        previousNode.next = node
     }
 
     getNodeByIndex() {
