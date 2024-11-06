@@ -253,23 +253,47 @@ Array.apply(this, { length: 100 }).map(function (_thisobj, a, b, c) {
 })
 // output: 0, 1, 2, 3...
 ```
-##### 任务切片
+### 17 任务切片
+##### 仅保证在`duration`内执行任务
 ```javascript
 function* gen(taskQueue) {
-    let i = 0;
+    let i = 0
     while(i < taskQueue.length) {
-        const nextTask = taskQueue[i];
-        yield nextTask();
-        i++;
+        const nextTask = taskQueue[i]
+        yield nextTask()
+        i++
     }
 }
 
 function timeSlice(taskQueue, duration) {
-    const startTime = performance.now();
-    const g = gen(taskQueue);
-    let res;
+    const startTime = performance.now()
+    const g = gen(taskQueue)
+    let res
     do {
-        res = g.next();
-    } while (res.done !== true && performance.now() - startTime < duration);
+        res = g.next()
+    } while (res.done !== true && performance.now() - startTime < duration)
+}
+```
+##### 在`duration`外执行剩余任务
+```javascript
+function* gen(taskQueue) {
+    while(taskQueue.length > 0) {
+        const nextTask = taskQueue.shift
+        yield nextTask();
+    }
+}
+
+function timeSlice(taskQueue, duration) {
+    const startTime = performance.now()
+    const g = gen(taskQueue)
+    let res
+    do {
+        res = g.next()
+    } while (res.done !== true && performance.now() - startTime < duration)
+}
+ // 创建100万次循环任务
+const tasks = Array.from({ length: 1000000 }).map(t => () => { console.log(Math.random() * 10000 - performance.now()) });
+while (tasks.length > 0) {
+    timeSlice(tasks, 15);
 }
 ```
