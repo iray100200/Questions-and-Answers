@@ -294,7 +294,7 @@ function timeSlice(taskQueue, duration) {
             res = g.next()
             exceed = performance.now() - startTime > duration
             if (res.done || exceed) {
-                resolve(res.value)
+                resolve(taskQueue)
             }
         } while (res.done !== true && !exceed)
     })
@@ -305,4 +305,6 @@ const tasks = Array.from({ length: 100000 }).map(t => () => { console.log(perfor
 function run(tasks) {
     timeSlice(tasks, 15).then((restTasks) => restTasks.length > 0 && run(restTasks))
 }
+
+run(tasks)
 ```
