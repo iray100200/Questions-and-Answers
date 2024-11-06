@@ -278,22 +278,31 @@ function timeSlice(taskQueue, duration) {
 ```javascript
 function* gen(taskQueue) {
     while(taskQueue.length > 0) {
-        const nextTask = taskQueue.shift
-        yield nextTask();
+        const nextTask = taskQueue.shift()
+        nextTask()
+        yield taskQueue
     }
 }
 
 function timeSlice(taskQueue, duration) {
-    const startTime = performance.now()
-    const g = gen(taskQueue)
-    let res
-    do {
-        res = g.next()
-    } while (res.done !== true && performance.now() - startTime < duration)
+    return new Promise((resolve) => {
+        const startTime = performance.now()
+        const g = gen(taskQueue)
+        let res
+        let exceed = false
+        do {
+            res = g.next()
+            exceed = performance.now() - startTime > duration
+            if (res.done || exceed) {
+                resolve(res.value)
+            }
+        } while (res.done !== true && !exceed)
+    })
 }
  // 创建100万次循环任务
-const tasks = Array.from({ length: 1000000 }).map(t => () => { console.log(Math.random() * 10000 - performance.now()) });
-while (tasks.length > 0) {
-    timeSlice(tasks, 15);
+const tasks = Array.from({ length: 100000 }).map(t => () => { console.log(performance.now()) })
+
+function run(tasks) {
+    timeSlice(tasks, 15).then((restTasks) => restTasks.length > 0 && run(restTasks))
 }
 ```
