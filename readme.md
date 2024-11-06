@@ -308,3 +308,31 @@ function run(tasks) {
 
 run(tasks)
 ```
+
+### 链表
+链表的节点包括指针和数据，Node节点的指针是指向下一个节点的地址，以JS举例
+```typescript
+class Node {
+    data: Object
+    next: Node
+}
+class LinkedList {
+    public head: Node
+
+    insertBeforeIndex(node: Node, index: number) {
+        let n = 0
+        let previousNode = this.head
+        let currentNode = this.head
+        while (currentNode.next && n++ < index) {
+            previous = currentNode
+            currentNode = currentNode.next
+        }
+        node.next = currentNode
+        previous.next = node
+    }
+
+    getNodeByIndex() {
+        // implementation
+    }
+}
+```
