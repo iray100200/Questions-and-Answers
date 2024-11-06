@@ -309,7 +309,7 @@ function run(tasks) {
 run(tasks)
 ```
 
-### 链表
+### 18 链表
 链表的节点包括指针和数据，Node节点的指针是指向下一个节点的地址，以JS举例
 ```typescript
 class Node {
