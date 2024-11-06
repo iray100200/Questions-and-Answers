@@ -254,7 +254,7 @@ Array.apply(this, { length: 100 }).map(function (_thisobj, a, b, c) {
 // output: 0, 1, 2, 3...
 ```
 ##### 任务切片
-```
+```javascript
 function* gen(taskQueue) {
     let i = 0;
     while(i < taskQueue.length) {
