@@ -336,3 +336,27 @@ class LinkedList {
     }
 }
 ```
+
+### 19 算法：在数量为N的随机序列中，随机抓取K个数，求所有数的组合
+```javascript
+function getAllCombinations(data, k) {
+    const result = []
+    function loop(data, index = 0, tempoary = []) {
+        for (let i = 0; i < data.length - (k - 1 - index); i++) {
+            tempoary[index] = data[i]
+            if (index === k - 1) {
+                result.push([...tempoary])
+            }
+            if (index < k - 1) {
+                const nextIndex = index + 1
+                loop(data.slice(i + 1), nextIndex, tempoary)
+                if (nextIndex === k - 1) {
+                    tempoary = []
+                }
+            }
+        }
+    }
+    loop(data, 0)
+    return result
+}
+```
