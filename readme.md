@@ -289,14 +289,14 @@ function timeSlice(taskQueue, duration) {
         const startTime = performance.now()
         const g = gen(taskQueue)
         let res
-        let exceed = false
+        let overtime = false
         do {
             res = g.next()
-            exceed = performance.now() - startTime > duration
-            if (res.done || exceed) {
+            overtime = performance.now() - startTime > duration
+            if (res.done || overtime) {
                 resolve(taskQueue)
             }
-        } while (res.done !== true && !exceed)
+        } while (res.done !== true && !overtime)
     })
 }
  // 创建100万次循环任务
