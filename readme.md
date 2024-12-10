@@ -253,60 +253,43 @@ Array.apply(this, { length: 100 }).map(function (_thisobj, a, b, c) {
 })
 // output: 0, 1, 2, 3...
 ```
-### 17 任务切片
-##### 仅保证在`duration`内执行任务
-```javascript
-function* gen(taskQueue) {
-    let i = 0
-    while(i < taskQueue.length) {
-        const nextTask = taskQueue[i]
-        yield nextTask()
-        i++
+### 17 时间切片
+```html
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+  <button onclick="run(tasks)">run</button>
+</body>
+<script>
+  function runTask(taskQueue) {
+    if (taskQueue.length > 0) {
+      const nextTask = taskQueue.shift()
+      nextTask()
     }
-}
+  }
 
-function timeSlice(taskQueue, duration) {
+  function timeSlice(taskQueue, duration) {
     const startTime = performance.now()
-    const g = gen(taskQueue)
-    let res
+    let overtime = false
     do {
-        res = g.next()
-    } while (res.done !== true && performance.now() - startTime < duration)
-}
-```
-##### 在`duration`外执行剩余任务
-```javascript
-function* gen(taskQueue) {
-    while(taskQueue.length > 0) {
-        const nextTask = taskQueue.shift()
-        nextTask()
-        yield taskQueue
-    }
-}
+      runTask(taskQueue)
+      overtime = performance.now() - startTime > duration
+      if (taskQueue.length === 0 || overtime) {
+        setTimeout(() => timeSlice(taskQueue, duration), 0)
+      }
+    } while (taskQueue.length > 0 && !overtime)
+  }
+  // 创建100万次循环任务
+  window.tasks = Array.from({ length: 100000 }).map(t => () => { console.log(performance.now()) })
 
-function timeSlice(taskQueue, duration) {
-    return new Promise((resolve) => {
-        const startTime = performance.now()
-        const g = gen(taskQueue)
-        let res
-        let overtime = false
-        do {
-            res = g.next()
-            overtime = performance.now() - startTime > duration
-            if (res.done || overtime) {
-                resolve(taskQueue)
-            }
-        } while (res.done !== true && !overtime)
-    })
-}
- // 创建100万次循环任务
-const tasks = Array.from({ length: 100000 }).map(t => () => { console.log(performance.now()) })
+  function run(tasks) {
+    timeSlice(tasks, 5)
+  }
 
-function run(tasks) {
-    timeSlice(tasks, 15).then((restTasks) => restTasks.length > 0 && run(restTasks))
-}
+</script>
 
-run(tasks)
+</html>
 ```
 
 ### 18 链表
