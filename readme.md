@@ -361,3 +361,35 @@ const a = new ClassObjectA()
 const b = new ClassObjectB()
 ```
 那么，`b.__proto__`指向`ClassObjectB.prototype`，而`b.__proto__.__proto__`指向`ClassObjectA.prototype`。在旧版浏览器标准中，`__proto__`用于原型链的实现。`new ClassObjectB`的过程，首先创建一个空对象，并将`ClassObjectB.prototype`指向`[[prototyoe]]`或`__proto__`，然后调用`ClassObjectB`的构造函数，如果构造函数的返回值返回的是一个·对象·，那么将直接返回该·对象·返回值，示例中的`{ name: 'class object b' }`，否则将返回该`ClassObjectB`的实例。
+### 21 实现一个异步任务池的函数
+```
+function handleAsyncTasks(asyncTasks, limit) {
+  let results = []
+  let count = 0
+  let length = asyncTasks.length
+  function run(asyncTasks, limit, index = 0, callback) {
+    if (asyncTasks.length > 0) {
+      const next = asyncTasks.shift()
+      index = index + 1
+      next().then((t) => {
+        results.push(t)
+        run(asyncTasks, limit, index - 1, callback)
+      }).then(() => {
+        count += 1
+        if (length === count) {
+          callback(results)
+        }
+      })
+      if (index < limit) {
+        run(asyncTasks, limit, index, callback)
+      }
+    }
+  }
+  return new Promise((resolve) => {
+    run(asyncTasks, limit, 0, () => {
+      console.log(results)
+      resolve(results)
+    })
+  })
+}
+```
