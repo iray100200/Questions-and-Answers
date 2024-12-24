@@ -344,7 +344,7 @@ function getAllCombinations(data, k) {
 }
 ```
 ### 20 __proto__与prototype与new ClassObject()
-假设有一个类：
+假设有两个类：
 ```
 class ClassObjectA {
     constructor() {
@@ -360,4 +360,4 @@ class ClassObjectB extends ClassObjectA {
 const a = new ClassObjectA()
 const b = new ClassObjectB()
 ```
-那么，`b.__proto__`指向`ClassObjectB.prototype`，而`b.__proto__.__proto__`指向`ClassObjectA.prototype`。在旧版浏览器标准中，`__proto__`用于原型链的实现。`new ClassObjectB`的过程，首先创建一个控对象，并将`ClassObjectB.prototype`指向`[[prototyoe]]`或`__proto__`，然后调用`ClassObjectB`的构造函数，如果构造函数的返回值返回的是一个·对象·，那么将直接返回该·对象·返回值，示例中的`{ name: 'class object b' }`，否则将返回该`ClassObjectB`的实例。
+那么，`b.__proto__`指向`ClassObjectB.prototype`，而`b.__proto__.__proto__`指向`ClassObjectA.prototype`。在旧版浏览器标准中，`__proto__`用于原型链的实现。`new ClassObjectB`的过程，首先创建一个空对象，并将`ClassObjectB.prototype`指向`[[prototyoe]]`或`__proto__`，然后调用`ClassObjectB`的构造函数，如果构造函数的返回值返回的是一个·对象·，那么将直接返回该·对象·返回值，示例中的`{ name: 'class object b' }`，否则将返回该`ClassObjectB`的实例。
